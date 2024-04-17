@@ -1,14 +1,28 @@
-import { useState } from 'react';
-import productsArray from '../data/productsData';
+import { useEffect, useState } from 'react';
+import fetchProducts from '../utils/api';
 
 const useFilteredProducts = () => {
-	const [filteredProducts, setFilteredProducts] = useState(productsArray);
+	const [products, setProducts] = useState([]);
+	const [filteredProducts, setFilteredProducts] = useState([]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const fetchedProducts = await fetchProducts();
+				setProducts(fetchedProducts);
+				setFilteredProducts(fetchedProducts);
+			} catch (error) {
+				console.error('Error fetching products:', error);
+			}
+		};
+		fetchData();
+	}, []);
 
 	const getFilterProducts = (category) => {
 		setFilteredProducts(
 			category
-				? productsArray.filter((product) => product.category === category)
-				: productsArray
+				? products.filter((product) => product.category === category)
+				: filteredProducts
 		);
 	};
 

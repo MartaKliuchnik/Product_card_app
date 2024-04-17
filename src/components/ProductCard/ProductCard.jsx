@@ -1,19 +1,21 @@
 import { Card, Typography, CardContent } from '@mui/material';
 import styles from './ProductCard.module.css';
 
-export default function ProductCard({ name, description, price, category }) {
+export default function ProductCard({ title, description, price, category }) {
 	return (
 		<Card className={styles['product-card']}>
-			<CardContent>
-				<Typography variant='h6'>{name}</Typography>
-				<Typography variant='body2' color='textSecondary'>
-					{description}
+			<CardContent className={styles['card-content']}>
+				<Typography variant='subtitle2' sx={{ pb: 1 }}>
+					{title}
 				</Typography>
 				<Typography variant='body2' color='textSecondary'>
 					Price: ${price}
 				</Typography>
 				<Typography variant='body2' color='textSecondary'>
 					Category: {category}
+				</Typography>
+				<Typography variant='body2' color='textSecondary' sx={{ pt: 1 }}>
+					{description}
 				</Typography>
 			</CardContent>
 		</Card>

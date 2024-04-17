@@ -3,3 +3,8 @@
 	height: 150px;
 	margin-bottom: 20px;
 }
+
+.card-content {
+	max-height: 100%;
+	overflow: scroll;
+}

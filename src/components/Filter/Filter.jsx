@@ -9,11 +9,11 @@ export default function Filter({ onFilter }) {
 			justifyContent='center'
 			alignItems='center'
 		>
-			<Button onClick={() => onFilter('Electronics')} variant='contained'>
+			<Button onClick={() => onFilter('electronics')} variant='contained'>
 				Show Electronics
 			</Button>
-			<Button onClick={() => onFilter('Sports')} variant='contained'>
-				Show Sports
+			<Button onClick={() => onFilter('jewelery')} variant='contained'>
+				Show Jewelery
 			</Button>
 			<Button onClick={() => onFilter(null)} variant='contained'>
 				Reset Filters
