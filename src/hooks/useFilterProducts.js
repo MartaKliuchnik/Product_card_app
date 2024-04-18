@@ -22,11 +22,11 @@ const useFilteredProducts = () => {
 		setFilteredProducts(
 			category
 				? products.filter((product) => product.category === category)
-				: filteredProducts
+				: products
 		);
 	};
 
-	return [filteredProducts, getFilterProducts];
+	return [filteredProducts, getFilterProducts, products];
 };
 
 export default useFilteredProducts;

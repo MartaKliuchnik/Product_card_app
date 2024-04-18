@@ -1,9 +1,18 @@
-import { Card, Typography, CardContent } from '@mui/material';
+import {
+	Card,
+	Typography,
+	CardContent,
+	IconButton,
+	CardActions,
+	Grid,
+} from '@mui/material';
 import styles from './ProductCard.module.css';
 import { getShortenedTitle } from '../../utils/shortenedTitle';
 import { useMemo } from 'react';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-export default function ProductCard({ title, description, price, category }) {
+export default function ProductCard({ product, isFavorite, onFavoriteClick }) {
+	const { title, description, price, category } = product;
 	const shortenedTitle = useMemo(() => getShortenedTitle(title), [title]);
 
 	return (
@@ -18,7 +27,17 @@ export default function ProductCard({ title, description, price, category }) {
 				<Typography variant='body2' color='textSecondary'>
 					Category: {category}
 				</Typography>
-				<Typography variant='body2' color='textSecondary' sx={{ pt: 1 }}>
+				<Grid container justifyContent='center'>
+					<CardActions disableSpacing>
+						<IconButton
+							aria-label='add to favorites'
+							onClick={() => onFavoriteClick(product.id)}
+						>
+							<FavoriteIcon sx={{ color: isFavorite ? 'red' : 'inherit' }} />
+						</IconButton>
+					</CardActions>
+				</Grid>
+				<Typography variant='body2' color='textSecondary' sx={{ pt: 1, pb: 2 }}>
 					{description}
 				</Typography>
 			</CardContent>
