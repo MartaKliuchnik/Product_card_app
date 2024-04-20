@@ -1,4 +1,4 @@
-export default countries = [
+const countries = [
 	'United States',
 	'Canada',
 	'Mexico',
@@ -20,3 +20,4 @@ export default countries = [
 	'Egypt',
 	'Saudi Arabia',
 ];
+export default countries;

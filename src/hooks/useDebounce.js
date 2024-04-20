@@ -1,10 +1,11 @@
 export default function useDebounce(func, delay) {
 	let timeout;
 
-	return (...arg) => {
+	return (...args) => {
+		console.log(args);
 		if (timeout) clearTimeout(timeout);
 		timeout = setTimeout(() => {
-			func(...arg);
+			func(...args);
 		}, delay);
 	};
 }
