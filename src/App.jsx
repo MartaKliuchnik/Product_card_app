@@ -1,17 +1,18 @@
-import { useState } from 'react';
 import Toolbar from './components/Toolbar';
 import ThemeToggler from './components/ThemeToggler';
-import { ThemeContext } from './Context.js';
+import ThemeProvider from './components/ThemeProvider';
+import InfoContainer from './components/InfoContainer';
 
 function App() {
-	const [theme, setTheme] = useState('light');
-
 	console.log('re-render App');
 	return (
-		<ThemeContext.Provider value={{ theme, setTheme }}>
-			<Toolbar />
-			<ThemeToggler />
-		</ThemeContext.Provider>
+		<>
+			<ThemeProvider>
+				<Toolbar />
+				<ThemeToggler />
+			</ThemeProvider>
+			<InfoContainer />
+		</>
 	);
 }
 

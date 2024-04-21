@@ -3,11 +3,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../Context';
 
 export default function ThemeToggler() {
-	const { setTheme } = useContext(ThemeContext);
-
-	const toggleTheme = () => {
-		setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-	};
+	const { toggleTheme } = useContext(ThemeContext);
 
 	console.log('re-render ThemeToggler');
 
