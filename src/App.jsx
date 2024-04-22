@@ -1,7 +1,13 @@
-import Products from './components/Products/Products';
+import { DebouncedInput } from './components/DebouncedInput';
+import ThrottledInput from './components/ThrottledInput';
 
 function App() {
-	return <Products />;
+	return (
+		<>
+			<DebouncedInput />
+			<ThrottledInput />
+		</>
+	);
 }
 
 export default App;
