@@ -1,48 +1,41 @@
-import { useState } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { useState, Suspense, lazy } from 'react';
+import Loading from './Loading';
 
-const style = {
-	border: '1px solid green',
-	margin: 12,
-	padding: 8,
-};
+const MarkDownPreview = lazy(() => delayForDemo(import('./MarkDownPreview')));
 
 function App() {
-	const [dataSource, setDataSource] = useState(Array.from({ length: 30 }));
-	const [hasMore, setHasMore] = useState(true);
-
-	const fetchMoreData = () => {
-		// API CALL
-		if (dataSource.length >= 100) {
-			setHasMore(false);
-			return;
-		}
-		setTimeout(() => {
-			setDataSource([...dataSource, ...Array.from({ length: 10 })]);
-		}, 500);
-	};
+	const [showPreview, setShowPreview] = useState(false);
+	const [markdown, setMarkdown] = useState('Hello, **world**!');
 
 	return (
-		<InfiniteScroll
-			dataLength={dataSource.length}
-			next={fetchMoreData}
-			hasMore={hasMore}
-			loader={<h4>Loading...</h4>}
-			endMessage={
-				<p style={{ textAlign: 'center' }}>
-					<b>Yay! You have seen it all</b>
-				</p>
-			}
-		>
-			{dataSource.map((item, index) => {
-				return (
-					<div key={index} style={style}>
-						This is a div #{index + 1} inside InfiniteScroll
-					</div>
-				);
-			})}
-		</InfiniteScroll>
+		<>
+			<textarea
+				value={markdown}
+				onChange={(e) => setMarkdown(e.target.value)}
+			/>
+			<label>
+				<input
+					type='checkbox'
+					checked={showPreview}
+					onChange={(e) => setShowPreview(e.target.checked)}
+				/>
+				Show preview
+			</label>
+			<hr />
+			{showPreview && (
+				<Suspense fallback={<Loading />}>
+					<h2>Preview</h2>
+					<MarkDownPreview markdown={markdown} />
+				</Suspense>
+			)}
+		</>
 	);
+}
+
+async function delayForDemo(promise) {
+	return await new Promise((resolve) => {
+		setTimeout(resolve, 2000);
+	}).then(() => promise);
 }
 
 export default App;
