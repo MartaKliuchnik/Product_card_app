@@ -1,9 +1,8 @@
 export function DebouncedInput() {
 	function debounce(mainFunction, delay) {
 		let timeout = null;
-
 		return (...args) => {
-			if (timeout === null) {
+			if (timeout) {
 				clearTimeout(timeout);
 			}
 			timeout = setTimeout(() => {
